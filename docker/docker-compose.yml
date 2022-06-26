@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.36.2
+    ports:
+      - "9090:9090"
+    volumes:
+      - /Users/garystafford/Documents/projects/athena-spring-app/docker/prometheus:/etc/prometheus
+    networks:
+      - athena
+
+  grafana:
+    image: grafana/grafana-oss:9.0.1
+    ports:
+      - "3000:3000"
+    volumes:
+      - athena-grafana-storage:/var/lib/grafana
+    networks:
+      - athena
+
+  athena-spring-app:
+    image: garystafford/athena-spring-app:0.10.0
+    ports:
+      - "8080:8080"
+    environment:
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      RESULTS_BUCKET: ${RESULTS_BUCKET}
+      NAMED_QUERY_ID: ${NAMED_QUERY_ID}
+    networks:
+      - athena
+
+networks:
+  athena:
+    driver: overlay
+
+volumes:
+  athena-grafana-storage:
+    external: true

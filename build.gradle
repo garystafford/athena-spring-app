@@ -1,0 +1,47 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'io.freefair.lombok' version '6.5.0-rc1'
+}
+
+group = 'aws.example'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+def restAssuredVersion = '4.5.1' // older version used to overcome bug/error
+def awsSdkVersion = '2.17.218'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // aws sdk
+    runtimeOnly "software.amazon.awssdk:bom:${awsSdkVersion}"
+    implementation "software.amazon.awssdk:athena:${awsSdkVersion}"
+//    implementation "software.amazon.awssdk:sts:${awsSdkVersion}"
+//    implementation 'com.amazonaws:aws-java-sdk-sts:1.12.239'
+
+    // spring
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+    implementation 'org.springframework:spring-context:5.3.20'
+
+    // monitoring
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.9.1'
+
+    // testings
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    testImplementation "io.rest-assured:json-path:${restAssuredVersion}"
+    testImplementation "io.rest-assured:xml-path:${restAssuredVersion}"
+    testImplementation "io.rest-assured:json-schema-validator:${restAssuredVersion}"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

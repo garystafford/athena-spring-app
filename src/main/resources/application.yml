@@ -1,0 +1,43 @@
+spring:
+  profiles:
+    active: dev
+server:
+  port: 8080
+  servlet:
+    contextPath: /v1
+logging:
+  level:
+    root: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+athena:
+  client-execution-timeout: 100000
+  region: us-east-1
+  workgroup: primary
+  catalog: AwsDataCatalog
+  database: tickit_demo
+  limit: 25
+  retry-sleep: 1000
+  results-bucket: ${RESULTS_BUCKET}
+  named-query-id: ${NAMED_QUERY_ID}
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+logging:
+  level:
+    root: INFO
