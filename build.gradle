@@ -20,8 +20,6 @@ dependencies {
     // aws sdk
     runtimeOnly "software.amazon.awssdk:bom:${awsSdkVersion}"
     implementation "software.amazon.awssdk:athena:${awsSdkVersion}"
-//    implementation "software.amazon.awssdk:sts:${awsSdkVersion}"
-//    implementation 'com.amazonaws:aws-java-sdk-sts:1.12.239'
 
     // spring
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
