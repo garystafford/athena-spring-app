@@ -1,7 +1,7 @@
 
 
 ```shell
-docker push garystafford/athena-spring-app:${TAG}
+# update three base64-encoded values in the Kubernetes Secret file first
 
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query 'Account')
 export AWS_REGION="us-east-1"
