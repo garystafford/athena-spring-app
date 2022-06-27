@@ -1,9 +1,6 @@
 # Developing Spring Boot Applications for Querying Data Lakes on AWS
 
-Source code for the blog post, [Developing Spring Boot Applications for Querying Data Lakes on AWS
-](https://garystafford.medium.com/developing-spring-boot-applications-for-querying-data-lakes-on-aws-eeefa298741): Learn to develop Cloud-native RESTful Java services that query and data in an AWS data lake using Amazon Athena
-
-See the post for instructions on using the source code.
+Source code for the blog post, [Developing Spring Boot Applications for Querying Data Lakes on AWS](https://garystafford.medium.com/developing-spring-boot-applications-for-querying-data-lakes-on-aws-eeefa298741): Learn how to develop Cloud-native RESTful Java services that query and data in an AWS data lake using Amazon Athena. See the post for instructions on using the source code.
 
 ## Starting the Spring Boot Service Locally
 
@@ -20,6 +17,8 @@ export NAMED_QUERY_ID="<your_named_query_id>"
 ## Sample Endpoints
 
 ```text
+http://localhost:8080/v1/swagger-ui/index.html
+
 http://localhost:8080/v1/acturator
 http://localhost:8080/v1/actuator/prometheus
 http://localhost:8080/v1/actuator/health
