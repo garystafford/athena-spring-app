@@ -19,13 +19,13 @@ class SaleBySellerResourceTests {
     @Test
     void findById() {
         // Get the first sellerId available
-        int id = get( "/v1/sales?limit=1")
+        int id = get("/v1/sales?limit=1")
                 .then()
                 .extract()
                 .path("[0].sellerId");
 
         // Get that seller's last name
-        String lastName = get( "/v1/users/{id}",  id)
+        String lastName = get("/v1/users/{id}", id)
                 .then()
                 .extract()
                 .path("lastName");

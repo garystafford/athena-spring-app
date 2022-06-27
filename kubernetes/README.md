@@ -12,14 +12,6 @@ kubectl create namespace ${NAMESPACE}
 
 kubectl apply -f kubernetes/secret.yml -n ${NAMESPACE}
 
-eksctl create iamserviceaccount \
-    --name athena-spring-app \
-    --namespace ${NAMESPACE} \
-    --cluster ${CLUSTER_NAME} \
-    --attach-policy-arn "arn:aws:iam::${ACCOUNT_ID}:policy/AthenaSpringApp" \
-    --approve \
-    --override-existing-serviceaccounts
-
 kubectl apply -f kubernetes/kubernetes.yml -n ${NAMESPACE}
 
 kubectl apply -f kubernetes/athena-spring-srv-hpa.yml -n ${NAMESPACE}

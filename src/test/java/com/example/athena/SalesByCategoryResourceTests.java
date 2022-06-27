@@ -5,7 +5,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.get;
@@ -118,7 +117,7 @@ class SalesByCategoryResourceTests {
 
     private String getSaleDate() {
         // Get the first saleTime available
-        String saleTime = get( "/v1/sales?limit=1")
+        String saleTime = get("/v1/sales?limit=1")
                 .then()
                 .extract()
                 .path("[0].saleTime");

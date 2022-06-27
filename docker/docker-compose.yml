@@ -20,7 +20,7 @@ services:
       - athena
 
   athena-spring-app:
-    image: garystafford/athena-spring-app:0.10.0
+    image: garystafford/athena-spring-app:0.11.0
     ports:
       - "8080:8080"
     environment:

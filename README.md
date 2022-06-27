@@ -1,6 +1,7 @@
 # Developing Spring Boot Applications for Querying Data Lakes on AWS
 
-Source code for the blog post, [Developing Spring Boot Applications for Querying Data Lakes on AWS](https://medium.com/@garystafford/developing-spring-boot-applications-for-querying-data-lakes-on-aws-eeefa298741): Learn to develop Cloud-native RESTful Java services that query and data in an AWS data lake using Amazon Athena
+Source code for the blog post, [Developing Spring Boot Applications for Querying Data Lakes on AWS
+](https://garystafford.medium.com/developing-spring-boot-applications-for-querying-data-lakes-on-aws-eeefa298741): Learn to develop Cloud-native RESTful Java services that query and data in an AWS data lake using Amazon Athena
 
 See the post for instructions on using the source code.
 
