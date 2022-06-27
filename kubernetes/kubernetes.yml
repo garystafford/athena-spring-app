@@ -59,10 +59,12 @@ spec:
                   name: athena-spring-srv
                   key: RESULTS_BUCKET
             - name: NAMED_QUERY_ID
-              value: "3e3205ec-751e-4a72-a0be-862683abfee7"
+              value: "<your_named_query_id>"
+            - name: AWS_REGION
+              value: us-east-1
             - name: SPRING_ACTIVE_PROFILE
-              value: prod
-          image: garystafford/athena-spring-app:0.10.0
+              value: prod # or dev
+          image: garystafford/athena-spring-app:0.11.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

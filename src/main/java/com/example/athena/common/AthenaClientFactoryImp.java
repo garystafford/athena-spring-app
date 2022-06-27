@@ -8,9 +8,8 @@ import software.amazon.awssdk.services.athena.AthenaClient;
 @Component
 public class AthenaClientFactoryImp implements AthenaClientFactory {
 
-    public AthenaClient createClient(String region, String profile) {
+    public AthenaClient createClient() {
         return AthenaClient.builder()
-                .region(Region.of(region))
                 .credentialsProvider(EnvironmentVariableCredentialsProvider.create())
                 .build();
     }

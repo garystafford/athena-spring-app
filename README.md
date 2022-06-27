@@ -9,6 +9,7 @@ See the post for instructions on using the source code.
 ```shell
 export AWS_ACCESS_KEY_ID=<your_id>
 export AWS_SECRET_ACCESS_KEY=<your_secret>
+export AWS_REGION=us-east-1
 export RESULTS_BUCKET="s3://aws-athena-query-results-<your_bucket>/"
 export NAMED_QUERY_ID="<your_named_query_id>"
 

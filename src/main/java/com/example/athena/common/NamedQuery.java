@@ -25,7 +25,7 @@ public class NamedQuery {
     }
 
 //    public void GetNamedQuery() {
-//        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient(configProperties.getRegion(), configProperties.getIamProfile())) {
+//        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient()) {
 //            try {
 //                ListNamedQueriesRequest listNamedQueriesRequest = ListNamedQueriesRequest.builder()
 //                        .build();
@@ -67,7 +67,7 @@ public class NamedQuery {
                 	buyers b
                 WHERE u.userid = b.id;""";
 
-        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient(configProperties.getRegion(), configProperties.getIamProfile())) {
+        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient()) {
             CreateNamedQueryRequest createNamedQueryRequest = CreateNamedQueryRequest.builder()
                     .name(namedQueryName)
                     .description("Returns sums of all buyer's likes")

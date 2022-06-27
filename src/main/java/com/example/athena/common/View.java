@@ -49,7 +49,7 @@ public class View {
                     catgroup,
                     catname;""", viewName);
 
-        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient(configProperties.getRegion(), configProperties.getIamProfile())) {
+        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient()) {
             try {
                 GetTableMetadataResponse getPreparedStatementRequest = getGetTableMetadataResponse(viewName, athenaClient);
                 logger.debug(String.format("View already exists: %s", getPreparedStatementRequest.tableMetadata().name()));

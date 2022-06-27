@@ -44,7 +44,7 @@ public class BuyerLikesByCategoryServiceImp implements BuyersLikesByCategoryServ
 
         logger.debug(String.format("NamedQueryId: %s", queryId));
 
-        AthenaClient athenaClient = athenaClientFactory.createClient(configProperties.getRegion(), configProperties.getIamProfile());
+        AthenaClient athenaClient = athenaClientFactory.createClient();
         GetNamedQueryRequest getNamedQueryRequest = GetNamedQueryRequest.builder()
                 .namedQueryId(queryId)
                 .build();

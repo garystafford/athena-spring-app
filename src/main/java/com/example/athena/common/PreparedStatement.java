@@ -52,7 +52,7 @@ public class PreparedStatement {
                 ORDER BY caldate,
                     eventname;""";
 
-        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient(configProperties.getRegion(), configProperties.getIamProfile())) {
+        try (AthenaClient athenaClient = athenaClientFactoryImp.createClient()) {
             try {
                 GetPreparedStatementResponse getPreparedStatementResponse = getGetPreparedStatementResponse(preparedStatementName, athenaClient);
                 logger.debug(String.format("Prepared statement already exists: %s", getPreparedStatementResponse.preparedStatement().statementName()));

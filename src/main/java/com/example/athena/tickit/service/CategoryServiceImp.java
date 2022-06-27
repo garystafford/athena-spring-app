@@ -71,7 +71,7 @@ public class CategoryServiceImp implements CategoryService {
 
         logger.debug(String.format("Query: %s", query));
 
-        AthenaClient athenaClient = athenaClientFactory.createClient(configProperties.getRegion(), configProperties.getIamProfile());
+        AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);
         athenaCommon.waitForQueryToComplete(athenaClient, queryExecutionId);
         List<Category> categories = processResultRows(athenaClient, queryExecutionId);

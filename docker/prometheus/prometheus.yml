@@ -30,9 +30,3 @@ scrape_configs:
     metrics_path: '/v1/actuator/prometheus'
     static_configs:
       - targets: ['athena-spring-app:8080']
-
-  - job_name: 'spring-boot-eks'
-    metrics_path: '/v1/actuator/prometheus'
-    scheme: https
-    static_configs:
-      - targets: [ 'athena.example-api.com' ]

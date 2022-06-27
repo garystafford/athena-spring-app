@@ -1,7 +1,6 @@
 package com.example.athena.common;
 
 import com.example.athena.config.ConfigProperties;
-import com.example.athena.moma.service.ArtistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import software.amazon.awssdk.services.athena.model.*;
 @Component
 public class AthenaCommon {
 
-    private static final Logger logger = LoggerFactory.getLogger(ArtistService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AthenaCommon.class);
 
     private final ConfigProperties configProperties;
 

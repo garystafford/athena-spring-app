@@ -74,7 +74,7 @@ public class SaleServiceImp implements SaleService {
 
         logger.debug(String.format("Query: %s", query));
 
-        AthenaClient athenaClient = athenaClientFactory.createClient(configProperties.getRegion(), configProperties.getIamProfile());
+        AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);
         athenaCommon.waitForQueryToComplete(athenaClient, queryExecutionId);
         List<Sale> sales = processResultRows(athenaClient, queryExecutionId);
