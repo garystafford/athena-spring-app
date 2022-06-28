@@ -27,11 +27,9 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
     implementation 'org.springframework:spring-context:5.3.20'
-
-    // monitoring
-    implementation 'io.micrometer:micrometer-registry-prometheus:1.9.1'
 
     // testings
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
@@ -39,6 +37,9 @@ dependencies {
     testImplementation "io.rest-assured:json-path:${restAssuredVersion}"
     testImplementation "io.rest-assured:xml-path:${restAssuredVersion}"
     testImplementation "io.rest-assured:json-schema-validator:${restAssuredVersion}"
+
+    // monitoring
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.9.1'
 }
 
 tasks.named('test') {
