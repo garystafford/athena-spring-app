@@ -5,21 +5,13 @@ server:
   port: 8080
   servlet:
     contextPath: /v1
-logging:
-  level:
-    root: DEBUG
-management:
-  endpoints:
-    web:
-      exposure:
-        include: prometheus
 athena:
-  client-execution-timeout: 100000
   region: us-east-1
   workgroup: primary
   catalog: AwsDataCatalog
   database: tickit_demo
   limit: 25
+  client-execution-timeout: 100000
   retry-sleep: 1000
   results-bucket: ${RESULTS_BUCKET}
   named-query-id: ${NAMED_QUERY_ID}
@@ -28,9 +20,15 @@ spring:
   config:
     activate:
       on-profile: dev
+logging:
+  level:
+    root: DEBUG
 management:
   endpoints:
     web:
+      exposure:
+        include: '*'
+    jmx:
       exposure:
         include: '*'
 ---
@@ -41,3 +39,11 @@ spring:
 logging:
   level:
     root: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+    jmx:
+      exposure:
+        include: health
