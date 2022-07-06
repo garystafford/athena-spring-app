@@ -41,3 +41,8 @@ http://localhost:8080/v1/users/3
 http://localhost:8080/v1/venues?limit=15&offset=10
 http://localhost:8080/v1/venues/5
 ```
+
+---
+
+<i>The contents of this repository represent my viewpoints and not of my past or current employers, including Amazon Web
+Services (AWS). All third-party libraries, modules, plugins, and SDKs are the property of their respective owners.</i>
