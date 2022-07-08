@@ -62,7 +62,7 @@ spec:
               value: "<your_named_query_id>"
             - name: AWS_REGION
               value: us-east-1
-            - name: SPRING_ACTIVE_PROFILE
+            - name: SPRING_PROFILES_ACTIVE
               value: prod # or dev
           image: garystafford/athena-spring-app:0.12.0
           imagePullPolicy: Always
