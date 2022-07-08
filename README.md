@@ -1,6 +1,9 @@
 # Developing Spring Boot Applications for Querying Data Lakes on AWS
 
-Source code for the blog post, [Developing Spring Boot Applications for Querying Data Lakes on AWS](https://garystafford.medium.com/developing-spring-boot-applications-for-querying-data-lakes-on-aws-eeefa298741): Learn how to develop Cloud-native RESTful Java services that query and data in an AWS data lake using Amazon Athena. See the post for instructions on using the source code.
+Source code for the blog
+post, [Developing Spring Boot Applications for Querying Data Lakes on AWS](https://garystafford.medium.com/developing-spring-boot-applications-for-querying-data-lakes-on-aws-eeefa298741):
+Learn how to develop Cloud-native RESTful Java services that query and data in an AWS data lake using Amazon Athena. See
+the post for instructions on using the source code.
 
 ## Starting the Spring Boot Service Locally
 
@@ -45,4 +48,7 @@ http://localhost:8080/v1/venues/5
 ---
 
 <i>The contents of this repository represent my viewpoints and not of my past or current employers, including Amazon Web
-Services (AWS). All third-party libraries, modules, plugins, and SDKs are the property of their respective owners. The author(s) assumes no responsibility or liability for any errors or omissions in the content of this site. The information contained in this site is provided on an "as is" basis with no guarantees of completeness, accuracy, usefulness or timeliness.</i>
+Services (AWS). All third-party libraries, modules, plugins, and SDKs are the property of their respective owners. The
+author(s) assumes no responsibility or liability for any errors or omissions in the content of this site. The
+information contained in this site is provided on an "as is" basis with no guarantees of completeness, accuracy,
+usefulness or timeliness.</i>
