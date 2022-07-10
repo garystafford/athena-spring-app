@@ -62,7 +62,7 @@ public class SalesByCategoryServiceImp implements SalesByCategoryService {
 
     private List<SalesByCategory> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);

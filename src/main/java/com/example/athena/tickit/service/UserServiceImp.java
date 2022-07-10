@@ -64,12 +64,19 @@ public class UserServiceImp implements UserService {
                 FROM refined_tickit_public_users
                 WHERE userid=%s""", id);
 
-        return startQuery(query).get(0);
+        User user;
+        try {
+            user = startQuery(query).get(0);
+        } catch (IndexOutOfBoundsException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+        return user;
     }
 
     private List<User> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);

@@ -64,12 +64,19 @@ public class VenueServiceImp implements VenueService {
                 FROM refined_tickit_public_venue
                 WHERE venueid=%s""", id);
 
-        return startQuery(query).get(0);
+        Venue venue;
+        try {
+            venue = startQuery(query).get(0);
+        } catch (IndexOutOfBoundsException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+        return venue;
     }
 
     private List<Venue> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);

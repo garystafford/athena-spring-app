@@ -37,7 +37,6 @@ public class BuyerLikesByCategoryServiceImp implements BuyersLikesByCategoryServ
 
     public List<BuyerLikesByCategory> get() {
         return getNamedQueryResults(configProperties.getNamedQueryId());
-        // return getNamedQueryResults(System.getProperty("namedQueryId")); // set during application startup
     }
 
     private List<BuyerLikesByCategory> getNamedQueryResults(String queryId) {

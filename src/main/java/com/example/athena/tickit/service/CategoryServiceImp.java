@@ -58,18 +58,27 @@ public class CategoryServiceImp implements CategoryService {
         return startQuery(query);
     }
 
+    s
+
     public Category findById(int id) {
         String query = String.format("""
                 SELECT  DISTINCT *
                 FROM refined_tickit_public_category
                 WHERE catid=%s;""", id);
 
-        return startQuery(query).get(0);
+        Category category;
+        try {
+            category = startQuery(query).get(0);
+        } catch (IndexOutOfBoundsException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+        return category;
     }
 
     private List<Category> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);

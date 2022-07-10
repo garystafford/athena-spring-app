@@ -65,12 +65,19 @@ public class DateDetailServiceImp implements DateDetailService {
                 FROM refined_tickit_public_date
                 WHERE dateid=%s""", id);
 
-        return startQuery(query).get(0);
+        DateDetail dateDetail;
+        try {
+            dateDetail = startQuery(query).get(0);
+        } catch (IndexOutOfBoundsException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+        return dateDetail;
     }
 
     private List<DateDetail> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);

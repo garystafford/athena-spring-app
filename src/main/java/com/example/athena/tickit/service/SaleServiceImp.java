@@ -67,12 +67,19 @@ public class SaleServiceImp implements SaleService {
                 FROM refined_tickit_public_sales
                 WHERE salesid=%s""", id);
 
-        return startQuery(query).get(0);
+        Sale sale;
+        try {
+            sale = startQuery(query).get(0);
+        } catch (IndexOutOfBoundsException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+        return sale;
     }
 
     private List<Sale> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);

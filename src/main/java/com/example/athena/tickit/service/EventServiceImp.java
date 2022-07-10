@@ -66,12 +66,19 @@ public class EventServiceImp implements EventService {
                 FROM refined_tickit_public_event
                 WHERE eventid=%s""", id);
 
-        return startQuery(query).get(0);
+        Event event;
+        try {
+            event = startQuery(query).get(0);
+        } catch (IndexOutOfBoundsException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+        return event;
     }
 
     private List<Event> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);

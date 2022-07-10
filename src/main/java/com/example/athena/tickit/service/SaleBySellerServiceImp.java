@@ -2,7 +2,6 @@ package com.example.athena.tickit.service;
 
 import com.example.athena.common.AthenaClientFactory;
 import com.example.athena.common.AthenaCommon;
-import com.example.athena.config.ConfigProperties;
 import com.example.athena.tickit.model.resultsets.SaleBySeller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +21,12 @@ public class SaleBySellerServiceImp implements SaleBySellerService {
 
     private static final Logger logger = LoggerFactory.getLogger(SaleBySellerServiceImp.class);
 
-    private final ConfigProperties configProperties;
-
     private final AthenaClientFactory athenaClientFactory;
 
     private final AthenaCommon athenaCommon;
 
     @Autowired
-    public SaleBySellerServiceImp(ConfigProperties configProperties, AthenaClientFactory athenaClientFactory, AthenaCommon athenaCommon) {
-        this.configProperties = configProperties;
+    public SaleBySellerServiceImp(AthenaClientFactory athenaClientFactory, AthenaCommon athenaCommon) {
         this.athenaClientFactory = athenaClientFactory;
         this.athenaCommon = athenaCommon;
     }
@@ -45,7 +41,7 @@ public class SaleBySellerServiceImp implements SaleBySellerService {
 
     private List<SaleBySeller> startQuery(String query) {
 
-        logger.debug(String.format("Query: %s", query));
+        logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);
