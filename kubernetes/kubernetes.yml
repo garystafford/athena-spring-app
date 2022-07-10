@@ -64,7 +64,7 @@ spec:
               value: us-east-1
             - name: SPRING_PROFILES_ACTIVE
               value: prod # or dev
-          image: garystafford/athena-spring-app:0.12.0
+          image: garystafford/athena-spring-app:0.13.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
