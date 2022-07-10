@@ -58,8 +58,6 @@ public class CategoryServiceImp implements CategoryService {
         return startQuery(query);
     }
 
-    s
-
     public Category findById(int id) {
         String query = String.format("""
                 SELECT  DISTINCT *
