@@ -7,6 +7,7 @@ import com.example.athena.tickit.model.resultsets.BuyerLikesByCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.athena.AthenaClient;
 import software.amazon.awssdk.services.athena.model.*;
@@ -35,6 +36,7 @@ public class BuyerLikesByCategoryServiceImp implements BuyersLikesByCategoryServ
         this.athenaCommon = athenaCommon;
     }
 
+    @Cacheable(value = "buyer-likes")
     public List<BuyerLikesByCategory> get() {
         return getNamedQueryResults(configProperties.getNamedQueryId());
     }

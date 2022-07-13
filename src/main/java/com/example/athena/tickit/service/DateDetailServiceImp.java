@@ -7,6 +7,7 @@ import com.example.athena.tickit.model.ecomm.DateDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.athena.AthenaClient;
 import software.amazon.awssdk.services.athena.model.*;
@@ -36,6 +37,7 @@ public class DateDetailServiceImp implements DateDetailService {
         this.athenaCommon = athenaCommon;
     }
 
+    @Cacheable(value = "dates")
     public List<DateDetail> findAll(Integer limit, Integer offset) {
 
         if (limit == null || limit < 1 || limit > configProperties.getLimit()) {
@@ -59,6 +61,7 @@ public class DateDetailServiceImp implements DateDetailService {
         return startQuery(query);
     }
 
+    @Cacheable(value = "date", key = "#id")
     public DateDetail findById(int id) {
         String query = String.format("""
                 SELECT  DISTINCT *

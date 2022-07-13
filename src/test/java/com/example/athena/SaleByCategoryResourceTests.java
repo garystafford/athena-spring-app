@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 
 @SpringBootTest
-class SalesByCategoryResourceTests {
+class SaleByCategoryResourceTests {
 
     private static final String ResourcePath = "/v1/salesbycategory";
 

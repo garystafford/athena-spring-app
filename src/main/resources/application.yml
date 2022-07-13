@@ -20,6 +20,15 @@ spring:
   config:
     activate:
       on-profile: dev
+  redis:
+    host: localhost
+    port: 6379
+  cache:
+    redis:
+      time-to-live: 60000 # 1000 ms * 60 * 1 = 1 min
+      enable-statistics: true
+server:
+  port: 8080
 logging:
   level:
     root: DEBUG
@@ -36,6 +45,13 @@ spring:
   config:
     activate:
       on-profile: prod
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+  cache:
+    redis:
+      time-to-live: 300000 # 1000 ms * 60 * 5 = 5 min
+      enable-statistics: true
 logging:
   level:
     root: INFO

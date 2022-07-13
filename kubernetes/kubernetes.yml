@@ -62,9 +62,11 @@ spec:
               value: "<your_named_query_id>"
             - name: AWS_REGION
               value: us-east-1
+            - name: REDIS_HOST
+              value: "<your_redis_hostname>"
             - name: SPRING_PROFILES_ACTIVE
-              value: prod # or dev
-          image: garystafford/athena-spring-app:0.13.0
+              value: prod
+          image: garystafford/athena-spring-app:0.28.0.redis
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -72,7 +74,7 @@ spec:
               path: /v1/actuator/health
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 0
+            initialDelaySeconds: 30
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
@@ -87,7 +89,7 @@ spec:
               path: /v1/actuator/health
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 0
+            initialDelaySeconds: 30
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10

@@ -6,10 +6,13 @@
 
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query 'Account')
 export AWS_REGION="us-east-1"
-export CLUSTER_NAME="<your_cluster>"
+export CLUSTER_NAME="<your_cluster_name>"
 export NAMESPACE="athena-spring"
 
 kubectl create namespace ${NAMESPACE}
+
+# used for redis-cli only (see post)
+kubectl apply -f kubernetes/redis.yml -n ${NAMESPACE}
 
 kubectl apply -f kubernetes/secret.yml -n ${NAMESPACE}
 

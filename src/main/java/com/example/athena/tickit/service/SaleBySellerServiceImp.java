@@ -6,6 +6,7 @@ import com.example.athena.tickit.model.resultsets.SaleBySeller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.athena.AthenaClient;
 import software.amazon.awssdk.services.athena.model.*;
@@ -31,6 +32,7 @@ public class SaleBySellerServiceImp implements SaleBySellerService {
         this.athenaCommon = athenaCommon;
     }
 
+    @Cacheable(value = "sales-by-seller", key = "#id")
     public List<SaleBySeller> find(int id) {
 
         String query = String.format("""

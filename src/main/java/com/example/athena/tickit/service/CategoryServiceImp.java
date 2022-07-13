@@ -7,6 +7,7 @@ import com.example.athena.tickit.model.saas.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.athena.AthenaClient;
 import software.amazon.awssdk.services.athena.model.*;
@@ -35,6 +36,7 @@ public class CategoryServiceImp implements CategoryService {
         this.athenaCommon = athenaCommon;
     }
 
+    @Cacheable(value = "categories")
     public List<Category> findAll(Integer limit, Integer offset) {
 
         if (limit == null || limit < 1 || limit > configProperties.getLimit()) {
@@ -58,6 +60,7 @@ public class CategoryServiceImp implements CategoryService {
         return startQuery(query);
     }
 
+    @Cacheable(value = "category", key = "#id")
     public Category findById(int id) {
         String query = String.format("""
                 SELECT  DISTINCT *

@@ -3,10 +3,11 @@ package com.example.athena.tickit.service;
 import com.example.athena.common.AthenaClientFactory;
 import com.example.athena.common.AthenaCommon;
 import com.example.athena.config.ConfigProperties;
-import com.example.athena.tickit.model.resultsets.SalesByCategory;
+import com.example.athena.tickit.model.resultsets.SaleByCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.athena.AthenaClient;
 import software.amazon.awssdk.services.athena.model.*;
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SalesByCategoryServiceImp implements SalesByCategoryService {
+public class SaleByCategoryServiceImp implements SaleByCategoryService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SalesByCategoryServiceImp.class);
+    private static final Logger logger = LoggerFactory.getLogger(SaleByCategoryServiceImp.class);
 
     private final ConfigProperties configProperties;
 
@@ -29,13 +30,14 @@ public class SalesByCategoryServiceImp implements SalesByCategoryService {
     private final AthenaCommon athenaCommon;
 
     @Autowired
-    public SalesByCategoryServiceImp(ConfigProperties configProperties, AthenaClientFactory athenaClientFactory, AthenaCommon athenaCommon) {
+    public SaleByCategoryServiceImp(ConfigProperties configProperties, AthenaClientFactory athenaClientFactory, AthenaCommon athenaCommon) {
         this.configProperties = configProperties;
         this.athenaClientFactory = athenaClientFactory;
         this.athenaCommon = athenaCommon;
     }
 
-    public List<SalesByCategory> findAll(String calendarDate, Integer limit, Integer offset) {
+    @Cacheable(value = "sales-by-category")
+    public List<SaleByCategory> findAll(String calendarDate, Integer limit, Integer offset) {
 
         if (limit == null || limit < 1 || limit > configProperties.getLimit()) {
             limit = configProperties.getLimit();
@@ -60,22 +62,22 @@ public class SalesByCategoryServiceImp implements SalesByCategoryService {
         return startQuery(query);
     }
 
-    private List<SalesByCategory> startQuery(String query) {
+    private List<SaleByCategory> startQuery(String query) {
 
         logger.debug(String.format("Query: %s", query.replace("\n", " ")));
 
         AthenaClient athenaClient = athenaClientFactory.createClient();
         String queryExecutionId = athenaCommon.submitAthenaQuery(athenaClient, query);
         athenaCommon.waitForQueryToComplete(athenaClient, queryExecutionId);
-        List<SalesByCategory> categories = processResultRows(athenaClient, queryExecutionId);
+        List<SaleByCategory> categories = processResultRows(athenaClient, queryExecutionId);
         athenaClient.close();
 
         return categories;
     }
 
-    private List<SalesByCategory> processResultRows(AthenaClient athenaClient, String queryExecutionId) {
+    private List<SaleByCategory> processResultRows(AthenaClient athenaClient, String queryExecutionId) {
 
-        List<SalesByCategory> salesByCategories = new ArrayList<>();
+        List<SaleByCategory> salesByCategories = new ArrayList<>();
 
         try {
             // Max Results can be set but if it's not set,
@@ -92,13 +94,13 @@ public class SalesByCategoryServiceImp implements SalesByCategoryService {
 
                 for (Row myRow : rows.subList(1, rows.size())) { // skip first row - column names
                     List<Datum> allData = myRow.data();
-                    SalesByCategory salesByCategory = new SalesByCategory();
-                    salesByCategory.setCalendarDate(LocalDate.parse(allData.get(0).varCharValue()));
-                    salesByCategory.setCategoryGroup(allData.get(1).varCharValue());
-                    salesByCategory.setCategoryName(allData.get(2).varCharValue());
-                    salesByCategory.setSaleAmount(new BigDecimal(allData.get(3).varCharValue()));
-                    salesByCategory.setCommission(new BigDecimal(allData.get(4).varCharValue()));
-                    salesByCategories.add(salesByCategory);
+                    SaleByCategory saleByCategory = new SaleByCategory();
+                    saleByCategory.setCalendarDate(LocalDate.parse(allData.get(0).varCharValue()));
+                    saleByCategory.setCategoryGroup(allData.get(1).varCharValue());
+                    saleByCategory.setCategoryName(allData.get(2).varCharValue());
+                    saleByCategory.setSaleAmount(new BigDecimal(allData.get(3).varCharValue()));
+                    saleByCategory.setCommission(new BigDecimal(allData.get(4).varCharValue()));
+                    salesByCategories.add(saleByCategory);
                 }
             }
         } catch (AthenaException e) {

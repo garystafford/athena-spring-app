@@ -1,7 +1,7 @@
 package com.example.athena.tickit.controller;
 
-import com.example.athena.tickit.model.resultsets.SalesByCategory;
-import com.example.athena.tickit.service.SalesByCategoryService;
+import com.example.athena.tickit.model.resultsets.SaleByCategory;
+import com.example.athena.tickit.service.SaleByCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,23 +14,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/salesbycategory")
-public class SalesByCategoryController {
+public class SaleByCategoryController {
 
-    private final SalesByCategoryService service;
+    private final SaleByCategoryService service;
 
     @Autowired
-    public SalesByCategoryController(SalesByCategoryService service) {
+    public SaleByCategoryController(SaleByCategoryService service) {
         this.service = service;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<SalesByCategory>> findAll(
+    public ResponseEntity<List<SaleByCategory>> findAll(
             @RequestParam(required = false) String date,
             @RequestParam(required = false) Integer limit,
             @RequestParam(required = false) Integer offset
     ) {
 
-        List<SalesByCategory> salesByCategories = service.findAll(date, limit, offset);
+        List<SaleByCategory> salesByCategories = service.findAll(date, limit, offset);
         if (salesByCategories.size() == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }

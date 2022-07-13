@@ -13,6 +13,7 @@ export AWS_SECRET_ACCESS_KEY="<your_secret_key>"
 export AWS_REGION="<your_region>"
 export RESULTS_BUCKET="<s3://<your_athena_results_bucket>"
 export NAMED_QUERY_ID="<your_named_query_id>"
+export SPRING_PROFILES_ACTIVE=dev;
 
 ./gradlew clean bootRun
 ```

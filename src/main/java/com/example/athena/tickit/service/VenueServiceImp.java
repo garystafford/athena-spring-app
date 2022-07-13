@@ -7,6 +7,7 @@ import com.example.athena.tickit.model.saas.Venue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.athena.AthenaClient;
 import software.amazon.awssdk.services.athena.model.*;
@@ -35,6 +36,7 @@ public class VenueServiceImp implements VenueService {
         this.athenaCommon = athenaCommon;
     }
 
+    @Cacheable(value = "venues")
     public List<Venue> findAll(Integer limit, Integer offset) {
 
         if (limit == null || limit < 1 || limit > configProperties.getLimit()) {
@@ -58,6 +60,7 @@ public class VenueServiceImp implements VenueService {
         return startQuery(query);
     }
 
+    @Cacheable(value = "venue", key = "#id")
     public Venue findById(int id) {
         String query = String.format("""
                 SELECT  DISTINCT *
